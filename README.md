@@ -15,12 +15,16 @@ This plugin now guides developers across the main PXP Unity surfaces:
 - Merchant webhooks
 - Risk screening
 - Reporting
-- Additional services such as Sessions, BIN lookup, and DCC discovery
+- Sessions
+- Wallet token decryption
+- Additional services such as BIN lookup and DCC discovery
+- Programmatic Links API patterns
 
 ## What this plugin includes
 
 - Skills for bootstrapping a new integration and shaping a payment flow
 - Product-specific skills for transactions, 3DS, tokenisation, checkout, webhooks, reporting, and risk screening
+- Reference-oriented skills for API auth, Sessions, Wallets, and smaller service APIs
 - Commands that help Cursor generate integration code and webhook handling
 - A PXP-focused agent profile for implementation planning and review
 - A marketplace-ready plugin manifest and logo
@@ -61,11 +65,15 @@ pxp-unity/
 │   ├── bootstrap-pxp-integration/SKILL.md
 │   ├── design-pxp-payments-flow/SKILL.md
 │   ├── implement-pxp-3ds/SKILL.md
+│   ├── implement-pxp-api-auth/SKILL.md
 │   ├── implement-pxp-checkout/SKILL.md
 │   ├── implement-pxp-reporting/SKILL.md
+│   ├── implement-pxp-reference-services/SKILL.md
 │   ├── implement-pxp-risk-screening/SKILL.md
+│   ├── implement-pxp-sessions/SKILL.md
 │   ├── implement-pxp-token-vault/SKILL.md
 │   ├── implement-pxp-transactions/SKILL.md
+│   ├── implement-pxp-wallets/SKILL.md
 │   └── implement-pxp-webhooks/SKILL.md
 └── README.md
 ```
@@ -93,6 +101,8 @@ pxp-unity/
 - Risk screening supports both standalone and integrated modes, with pre-authorisation and post-authorisation assessment flows.
 - Reporting is portal-oriented today, including saved queries, scheduled reports, CSV export, and webhook notifications for scheduled report generation.
 - CSV report exports are capped at 10,000 transactions.
+- The API reference surfaces also cover Sessions, Wallet token decryption, BIN lookup, DCC rate, Merchant webhooks, and programmatic Links creation.
+- Several service APIs document environment-specific base URLs and HMAC-style authentication requirements such as `PXP-UST1`, request IDs, and client identifiers.
 
 ## Suggested starter prompts
 
@@ -104,6 +114,10 @@ pxp-unity/
 - `/implement-pxp-webhooks create a secure webhook consumer with HMAC validation and duplicate handling`
 - `/implement-pxp-risk-screening place risk screening into my payment orchestration`
 - `/implement-pxp-reporting plan scheduled report downloads and internal reconciliation`
+- `/implement-pxp-api-auth explain how to shape authenticated PXP API requests`
+- `/implement-pxp-sessions design a secure payment-details collection flow`
+- `/implement-pxp-wallets plan backend wallet token decryption`
+- `/implement-pxp-reference-services compare BIN lookup, DCC, and Links API use cases`
 
 ## Quick start
 

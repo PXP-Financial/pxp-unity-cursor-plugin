@@ -40,6 +40,15 @@ The documented intents include:
 - `Refund`
 - `Verification`
 
+## API reference hints
+
+Across the PXP service APIs, preserve these setup concerns when relevant:
+
+- separate sandbox and production base URLs
+- service-specific auth headers such as `Authorization`
+- correlation headers such as `X-Request-Id`
+- service-specific client identifiers such as `X-Client-Id` where documented
+
 ## Constraints
 
 - Do not fabricate undocumented endpoints.
