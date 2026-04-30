@@ -10,3 +10,4 @@
 - Expanded coverage using PXP docs for transactions, 3DS, token vault, checkout, webhooks, reporting, and risk screening
 - Added product-specific skills and improved README guidance and starter prompts
 - Updated commands with documented webhook validation and transaction modeling details
+- Added deeper 3DS, webhook, risk-screening, and reporting constraints from the PXP docs

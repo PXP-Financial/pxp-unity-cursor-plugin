@@ -17,13 +17,25 @@ PXP risk screening evaluates fraud risk before or after authorisation and return
 
 ## Workflow
 
-1. Ask whether screening should run before or after authorisation.
-2. Identify which service owns the accept or reject decision.
-3. Model the handoff between screening, payment orchestration, and final transaction processing.
-4. Show how the result affects customer experience and operational workflows.
+1. Ask whether the merchant wants standalone or integrated risk screening.
+2. Ask whether screening should run before or after authorisation.
+3. Identify which service owns the accept or reject decision.
+4. Model the handoff between screening, payment orchestration, and final transaction processing.
+5. Show how the result affects customer experience and operational workflows.
+
+## Assessment modes
+
+- Pre-authorisation: assess risk before the issuer authorisation request is sent
+- Post-authorisation: assess risk after issuer authorisation and decide whether to capture or void
+
+## Integration modes
+
+- Standalone: separate fraud screening integration, independent of payment gateway orchestration
+- Integrated: screening is embedded into the PXP transaction lifecycle
 
 ## Guardrails
 
 - Do not present Omniscore as the sole decision.
 - Keep screening recommendations separate from the final merchant decision.
 - Call out how false positives or manual review would affect the wider payment flow.
+- Make it explicit whether post-authorisation screening leads to capture, hold, or void behavior.

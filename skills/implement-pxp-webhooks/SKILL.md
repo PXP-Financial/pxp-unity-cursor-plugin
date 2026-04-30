@@ -32,6 +32,7 @@ To validate a webhook:
 - PXP retries failed deliveries
 - duplicate events must be handled safely
 - the latest event data should win when duplicates arrive with updated timestamps
+- failed deliveries may be retried rapidly after the initial attempt
 
 ## Workflow
 
@@ -40,6 +41,21 @@ To validate a webhook:
 3. Route by `eventCategory` and event type.
 4. De-duplicate on stable event identifiers when available.
 5. Return quickly and process downstream work asynchronously when practical.
+
+## Event examples to plan for
+
+- `challenge-completed`
+- `transaction-authorised`
+- `transaction-cancelled`
+- `transaction-captured`
+- PayPal transaction lifecycle events
+- `scheduled-report-generated`
+- scheme token lifecycle events
+
+## Duplicate handling hints
+
+- The docs call out `eventCode` and `systemTransactionId` as key duplicate signals in transaction webhook processing.
+- Keep the latest event payload when timestamps differ across duplicates.
 
 ## Guardrails
 

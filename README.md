@@ -76,6 +76,11 @@ pxp-unity/
 - Transaction intents include `Authorisation`, `EstimatedAuthorisation`, `Purchase`, `Payout`, `Refund`, and `Verification`.
 - Transaction states include `Authorised`, `Captured`, `Cancelled`, `Error`, and `Refused`.
 - 3DS can be used in standalone or integrated mode and should be modeled as a stateful authentication flow.
+- 3DS states include `PendingClientData`, `PendingCustomerChallenge`, `AuthenticationSuccessful`, `AuthenticationFailed`, `AuthenticationRejected`, and `AuthenticationError`.
+- 3DS fingerprinting is optional but recommended, and the docs call out a 10-second completion window for the 3DS method callback.
+- 3DS challenge handling requires posting `creq` to the ACS and waiting for `cres`, with challenge window sizes from compact mobile windows to full screen native flows.
+- Integrated 3DS can carry the `authenticationId` directly into transaction authorisation.
+- Exemptions are not generic: integrated flows evaluate `LVP` and `TRA`, only one exemption should be applied at a time, and initial card-on-file setup flows should be treated differently.
 - Token Vault supports both gateway tokens and scheme tokens, with webhook events for token lifecycle changes.
 - Checkout should be chosen by channel and control needs:
   - `Components` for maximum layout and styling control
@@ -83,7 +88,11 @@ pxp-unity/
   - `Links` for hosted payment pages and no-code or low-code collection
 - Links are web-oriented; Android and iOS can open links, but the docs do not position Links as native SDK support.
 - Webhook validation uses `X-Request-Id`, `X-Signature-Timestamp`, and `X-Signature`, with an HMAC over `requestId + timestamp + rawBody`.
-- PXP retries failed webhook deliveries and integrators must handle duplicates safely.
+- PXP retries failed webhook deliveries up to 10 more times after the first failed attempt, and integrators must handle duplicates safely.
+- Duplicate webhook events should be reconciled carefully; the docs note matching identifiers and recommend using the latest event details.
+- Risk screening supports both standalone and integrated modes, with pre-authorisation and post-authorisation assessment flows.
+- Reporting is portal-oriented today, including saved queries, scheduled reports, CSV export, and webhook notifications for scheduled report generation.
+- CSV report exports are capped at 10,000 transactions.
 
 ## Suggested starter prompts
 
