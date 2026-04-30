@@ -1,0 +1,22 @@
+{
+  "name": "pxp-unity",
+  "version": "0.1.0",
+  "description": "Cursor plugin for integrating with the PXP Unity payment gateway using guided skills, commands, and implementation planning.",
+  "author": {
+    "name": "PXP Financial"
+  },
+  "homepage": "https://developer.pxp.io/",
+  "repository": "https://github.com/PXP-Financial/pxp-unity-cursor-plugin",
+  "license": "MIT",
+  "keywords": [
+    "pxp",
+    "unity",
+    "payments",
+    "gateway",
+    "3ds",
+    "checkout",
+    "tokenization",
+    "webhooks"
+  ],
+  "logo": "assets/logo.svg"
+}
