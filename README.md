@@ -105,6 +105,40 @@ pxp-unity/
 - `/implement-pxp-risk-screening place risk screening into my payment orchestration`
 - `/implement-pxp-reporting plan scheduled report downloads and internal reconciliation`
 
+## Quick start
+
+After installing the plugin in Cursor:
+
+1. Open a project where you want to build a PXP integration.
+2. Ask Cursor one focused question tied to your target flow.
+3. Let Cursor generate the smallest useful implementation slice first.
+4. Iterate from there with follow-up prompts for webhooks, 3DS, tokens, or reporting.
+
+Suggested first prompts:
+
+- `Build a minimal Express client for PXP Transactions sandbox testing`
+- `Help me choose between PXP Components, Drop-in, and Links`
+- `Create a secure PXP webhook handler with HMAC validation`
+- `Design a recurring billing flow using PXP Token Vault`
+- `Plan integrated 3DS with fallback behavior and error handling`
+
+## Support
+
+If you find a bug, docs gap, or integration issue:
+
+- open a GitHub issue in this repository
+- include the relevant PXP product area and stack
+- include sanitized request or response examples where possible
+
+For platform and account-specific support, use the normal PXP support and onboarding channels.
+
+## Maintenance and limitations
+
+- This plugin is maintained as an open-source integration aid for PXP Unity users.
+- It provides guided skills, commands, and workflow help inside Cursor.
+- It does not yet ship a live MCP-backed PXP documentation search service.
+- Where the public docs do not expose exact endpoint details, the plugin intentionally uses placeholders rather than inventing API behavior.
+
 ## Local testing
 
 To test locally, place or symlink this folder into your local Cursor plugins directory:

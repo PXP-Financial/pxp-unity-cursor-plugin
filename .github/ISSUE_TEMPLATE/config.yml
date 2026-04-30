@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Plugin support guidance
+    url: https://github.com/PXP-Financial/pxp-unity-cursor-plugin/blob/main/SUPPORT.md
+    about: Read support guidance before opening an issue.
