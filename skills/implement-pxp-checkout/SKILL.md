@@ -26,6 +26,25 @@ Use the documented checkout positioning:
 4. Recommend one primary checkout mode and optionally a secondary option.
 5. Generate only the integration slice for the selected mode.
 
+## Input checklist
+
+Confirm or ask for:
+
+- target platform: Web, Android, or iOS
+- embedded checkout or hosted payment page
+- desired go-live speed
+- required branding and layout control
+- required payment methods
+- whether recurring or MIT behavior is needed
+
+## Decision tree
+
+- If the merchant needs a hosted page they can share, recommend `Links`.
+- If the merchant needs an embedded experience and wants the fastest path, recommend `Drop-in`.
+- If the merchant needs embedded checkout and strong control over layout and styling, recommend `Components`.
+- If the platform is Android or iOS, do not position `Links` as a native SDK solution.
+- If the answer is not obvious, provide one primary option and one fallback with the trade-off spelled out.
+
 ## Output template
 
 1. Recommended checkout product
@@ -33,6 +52,13 @@ Use the documented checkout positioning:
 3. Platform support assumptions
 4. Integration sequence
 5. Open questions around branding, payment methods, and recurring payments
+
+## Example prompts
+
+- `Help me choose between PXP Components and Drop-in for a React checkout`
+- `Recommend the right PXP checkout mode for an Android app`
+- `We need a hosted payment page with minimal build effort. What should we use?`
+- `Design a branded embedded checkout with room for later recurring payments`
 
 ## Guardrails
 

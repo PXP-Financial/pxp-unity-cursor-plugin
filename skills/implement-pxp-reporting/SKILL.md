@@ -21,6 +21,40 @@ description: Implement PXP reporting workflows. Use when the user needs help cre
 4. Model how generated reports are retrieved, downloaded, stored, and processed.
 5. If webhooks are involved, route reporting events through the shared webhook handling path.
 
+## Input checklist
+
+Confirm or ask for:
+
+- ad-hoc or scheduled reporting
+- portal-driven or system-ingestion workflow
+- recipient list and permissions model
+- file format expectations
+- reconciliation or finance use case
+- whether webhook notifications are needed
+
+## Decision rules
+
+- If the need is repeatable operations, prefer scheduled reports over manual exports.
+- If the consumer is another internal system, model ingestion and storage explicitly instead of stopping at CSV download.
+- If the expected volume is high, call out the documented export limit and avoid assuming browser export is enough.
+- If the workflow depends on report readiness events, include the reporting webhook path.
+
+## Response template
+
+1. Reporting goal
+2. Query and scheduling setup
+3. Delivery or ingestion path
+4. Volume and format constraints
+5. Reconciliation considerations
+6. Open questions
+
+## Example prompts
+
+- `Plan a scheduled PXP reporting workflow for daily reconciliation`
+- `Show me how to turn a saved query into an operational reporting process`
+- `Design a reporting webhook consumer for scheduled report generation`
+- `Explain the limits of browser export versus scheduled reporting`
+
 ## Reporting integration advice
 
 - Keep report generation concerns separate from payment initiation logic.

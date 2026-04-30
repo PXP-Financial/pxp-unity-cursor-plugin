@@ -44,6 +44,44 @@ Use this skill when the integration needs cardholder authentication, PSD2 and SC
 - Initial card-on-file setup flows should not be treated like generic exemption candidates.
 - Issuer and scheme data requirements matter. The docs call out minimum fields for Mastercard and Visa that improve or enable compliant authentication flows.
 
+## Input checklist
+
+Confirm or ask for:
+
+- standalone or integrated 3DS
+- browser or native app flow
+- whether SCA is expected to apply
+- callback URLs for fingerprinting and challenge completion
+- whether exemptions are in scope
+- whether the transaction is an initial card-on-file setup
+
+## Decision rules
+
+- If the user uses PXP for payment processing too, prefer integrated 3DS unless there is a reason to separate concerns.
+- If `threeDSecureSupported` is false, explain the non-3DS fallback and liability implications.
+- If the response reaches `PendingCustomerChallenge`, model the full challenge path and callback handling.
+- If `AuthenticationRejected`, stop the authorisation path.
+- If `AuthenticationFailed` or `AuthenticationError`, surface retry or fallback behavior explicitly and mention liability shift loss.
+- If both `LVP` and `TRA` are available in integrated flows, prefer `TRA` unless the business has a reason not to.
+
+## Response template
+
+Use this structure:
+
+1. 3DS mode and assumptions
+2. Pre-initiation and fingerprinting steps
+3. Frictionless branch
+4. Challenge branch
+5. Failure and exemption handling
+6. Authorisation handoff
+
+## Example prompts
+
+- `Design an integrated PXP 3DS flow for a browser checkout`
+- `Explain every possible PXP 3DS state and what my backend should do`
+- `Show me a challenge flow with fingerprinting and callback handling`
+- `Help me decide when to use an exemption versus a full challenge`
+
 ## Guardrails
 
 - Do not reduce 3DS to a single success or failure boolean.

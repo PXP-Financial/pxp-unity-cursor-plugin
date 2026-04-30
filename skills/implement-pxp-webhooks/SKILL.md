@@ -42,6 +42,33 @@ To validate a webhook:
 4. De-duplicate on stable event identifiers when available.
 5. Return quickly and process downstream work asynchronously when practical.
 
+## Input checklist
+
+Confirm or ask for:
+
+- target stack and framework
+- raw body access strategy
+- configured HMAC key source
+- which event categories matter
+- storage strategy for deduplication
+- sync versus async downstream processing
+
+## Decision rules
+
+- If the framework mutates the body before verification, preserve the raw body explicitly.
+- If multiple PXP product areas are in scope, route by `eventCategory` before business-specific handling.
+- If deduplication identifiers are available, store them before side effects.
+- If processing is slow or may fail independently, acknowledge quickly and push work to async processing.
+
+## Response template
+
+1. Verification strategy
+2. Routing strategy
+3. Deduplication strategy
+4. Processing flow
+5. Failure and retry behavior
+6. Security notes
+
 ## Event examples to plan for
 
 - `challenge-completed`
@@ -56,6 +83,13 @@ To validate a webhook:
 
 - The docs call out `eventCode` and `systemTransactionId` as key duplicate signals in transaction webhook processing.
 - Keep the latest event payload when timestamps differ across duplicates.
+
+## Example prompts
+
+- `Create an Express webhook handler for PXP with HMAC verification`
+- `Show me how to deduplicate PXP transaction webhooks safely`
+- `Design a webhook routing layer for Authentication, Token, Transaction, and Reporting events`
+- `Help me preserve the raw request body for signature validation in my framework`
 
 ## Guardrails
 
