@@ -15,6 +15,7 @@ Create a minimal, production-leaning client for the current codebase to talk to 
    - sandbox or production target
    - base URL
    - required headers
+   - target API surface such as Transactions, 3DS, Token Vault, or Sessions
 3. Generate:
    - environment variable names
    - a small API client module
@@ -22,8 +23,26 @@ Create a minimal, production-leaning client for the current codebase to talk to 
    - one example error mapping strategy
 4. Keep the implementation framework-native and easy for integrators to read.
 
+## PXP transaction defaults
+
+If the user is integrating transactions, ask for or preserve these concepts explicitly:
+
+- `entryType`
+- `fundingType`
+- `intent`
+
+The documented intents include:
+
+- `Authorisation`
+- `EstimatedAuthorisation`
+- `Purchase`
+- `Payout`
+- `Refund`
+- `Verification`
+
 ## Constraints
 
 - Do not fabricate undocumented endpoints.
 - Use placeholders when the docs or user input do not provide concrete values.
 - Keep secrets out of source files.
+- Reflect documented transaction states and provider response fields when modeling responses.

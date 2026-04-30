@@ -12,6 +12,7 @@ Turn product requirements into a concrete PXP Unity integration flow that engine
 ## Use this skill for
 
 - hosted or embedded checkout planning
+- choosing between Components, Drop-in, and Links
 - 3DS and authentication branching
 - token vault decisions
 - webhook and reconciliation design
@@ -31,6 +32,8 @@ Turn product requirements into a concrete PXP Unity integration flow that engine
    - capture
    - refund
    - status polling or webhook updates
+   - risk screening
+   - reporting or reconciliation
 3. Map the actors and handoffs:
    - client application
    - merchant backend
@@ -42,6 +45,16 @@ Turn product requirements into a concrete PXP Unity integration flow that engine
    - raw card data handling
    - webhook verification
 5. Produce a sequence the team can implement in order.
+
+## PXP-specific design hints
+
+- For embedded checkout with maximum control, prefer `Components`.
+- For the fastest embedded integration, prefer `Drop-in`.
+- For shareable hosted payment pages, prefer `Links`.
+- Treat 3DS as a separate lifecycle with explicit state transitions and webhook or return-path handling.
+- For transactions, capture the intent early because `Authorisation`, `Purchase`, `Refund`, `Payout`, and `Verification` imply different flows.
+- Plan webhook-driven state updates for token events, transaction events, authentication events, and reporting events.
+- If risk screening is enabled, show where screening happens relative to authorisation and who makes the final accept or reject decision.
 
 ## Response template
 
@@ -61,7 +74,7 @@ Number the full request and response flow from user action through payment compl
 
 ### Failure handling
 
-Cover user cancellation, issuer challenge failure, timeout, duplicate submission, and webhook delay.
+Cover user cancellation, issuer challenge failure, timeout, duplicate submission, refusal, webhook delay, and duplicate webhook delivery.
 
 ### Open questions
 

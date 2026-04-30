@@ -1,12 +1,26 @@
 # PXP Unity Cursor Plugin
 
-`pxp-unity` is the official Cursor plugin starter for integrators building against the [PXP developer hub](https://developer.pxp.io/) and the PXP Unity gateway.
+`pxp-unity` is the official Cursor plugin for integrators building against the [PXP developer hub](https://developer.pxp.io/) and the PXP Unity gateway.
 
-It is designed to help developers start faster inside Cursor with reusable skills, commands, and agent prompts for common payment integration work.
+It is designed to help developers start faster inside Cursor with reusable skills, commands, and agent prompts for common PXP payment integration work.
+
+## Product coverage
+
+This plugin now guides developers across the main PXP Unity surfaces:
+
+- Transactions
+- 3D Secure
+- Token Vault
+- Checkout, including Components, Drop-in, and Links
+- Merchant webhooks
+- Risk screening
+- Reporting
+- Additional services such as Sessions, BIN lookup, and DCC discovery
 
 ## What this plugin includes
 
 - Skills for bootstrapping a new integration and shaping a payment flow
+- Product-specific skills for transactions, 3DS, tokenisation, checkout, webhooks, reporting, and risk screening
 - Commands that help Cursor generate integration code and webhook handling
 - A PXP-focused agent profile for implementation planning and review
 - A marketplace-ready plugin manifest and logo
@@ -17,7 +31,7 @@ It is designed to help developers start faster inside Cursor with reusable skill
 - Embedded API specs or official SDK code
 - Production credentials or account-specific configuration
 
-The first version focuses on making Cursor useful for integrators immediately without shipping a non-functional MCP dependency.
+This version focuses on making Cursor useful for integrators immediately without shipping a non-functional MCP dependency.
 
 ## Recommended integrator workflows
 
@@ -25,8 +39,12 @@ After installing the plugin, an integrator can ask Cursor to:
 
 - "Bootstrap a Node.js client for the PXP Unity transactions API"
 - "Design a checkout and 3DS flow for my app using PXP"
+- "Choose between Components, Drop-in, and Links for this checkout"
 - "Create a webhook endpoint for payment status updates"
+- "Verify PXP webhook signatures with HMAC headers"
 - "Compare token vault and direct card capture approaches for this project"
+- "Plan risk screening before authorisation"
+- "Handle reporting webhooks and scheduled report downloads"
 - "Review my PXP integration for missing edge cases"
 
 ## Files
@@ -41,9 +59,42 @@ pxp-unity/
 │   └── add-pxp-webhook-handler.md
 ├── skills/
 │   ├── bootstrap-pxp-integration/SKILL.md
-│   └── design-pxp-payments-flow/SKILL.md
+│   ├── design-pxp-payments-flow/SKILL.md
+│   ├── implement-pxp-3ds/SKILL.md
+│   ├── implement-pxp-checkout/SKILL.md
+│   ├── implement-pxp-reporting/SKILL.md
+│   ├── implement-pxp-risk-screening/SKILL.md
+│   ├── implement-pxp-token-vault/SKILL.md
+│   ├── implement-pxp-transactions/SKILL.md
+│   └── implement-pxp-webhooks/SKILL.md
 └── README.md
 ```
+
+## Integration guidance encoded from PXP docs
+
+- Transactions support e-commerce, MOTO, and in-store flows through one API surface.
+- Transaction intents include `Authorisation`, `EstimatedAuthorisation`, `Purchase`, `Payout`, `Refund`, and `Verification`.
+- Transaction states include `Authorised`, `Captured`, `Cancelled`, `Error`, and `Refused`.
+- 3DS can be used in standalone or integrated mode and should be modeled as a stateful authentication flow.
+- Token Vault supports both gateway tokens and scheme tokens, with webhook events for token lifecycle changes.
+- Checkout should be chosen by channel and control needs:
+  - `Components` for maximum layout and styling control
+  - `Drop-in` for the fastest embedded integration
+  - `Links` for hosted payment pages and no-code or low-code collection
+- Links are web-oriented; Android and iOS can open links, but the docs do not position Links as native SDK support.
+- Webhook validation uses `X-Request-Id`, `X-Signature-Timestamp`, and `X-Signature`, with an HMAC over `requestId + timestamp + rawBody`.
+- PXP retries failed webhook deliveries and integrators must handle duplicates safely.
+
+## Suggested starter prompts
+
+- `/bootstrap-pxp-integration build the smallest Node.js transaction client for sandbox use`
+- `/implement-pxp-transactions create a purchase flow with explicit state handling`
+- `/implement-pxp-3ds design an integrated 3DS flow and explain all state branches`
+- `/implement-pxp-checkout help me choose between Components, Drop-in, and Links`
+- `/implement-pxp-token-vault design a recurring billing flow using gateway tokens first`
+- `/implement-pxp-webhooks create a secure webhook consumer with HMAC validation and duplicate handling`
+- `/implement-pxp-risk-screening place risk screening into my payment orchestration`
+- `/implement-pxp-reporting plan scheduled report downloads and internal reconciliation`
 
 ## Local testing
 
@@ -68,5 +119,4 @@ Before submission:
 ## Next recommended improvements
 
 - Add a real PXP documentation MCP server or searchable docs layer
-- Add more product-specific skills for Transactions, 3DS, Checkout, and Token Vault
 - Add example commands for Node.js, .NET, Java, and PHP server integrations
